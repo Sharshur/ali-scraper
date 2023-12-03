@@ -159,6 +159,12 @@ def main():
                             driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
                         except CurrencyNotInShekelException:
+                            driver.find_element(By.CLASS_NAME, 'switcher-info').click()
+                            print("1")
+                            driver.find_element(By.CLASS_NAME, 'address-select-trigger').click()
+                            print("2")
+
+                            time.sleep(random.uniform(2, 4))
                             print(f'Currency not in shekel for product ID {product_id} - {raw_price}\nClosing and reopening driver then retrying...')
                             if currency_exceptions >= 10:
                                 print(f'10 currency exceptions reached on product ID {product_id} - {raw_price}, please contact Roy Keinan 0509139898 - Exiting...')
